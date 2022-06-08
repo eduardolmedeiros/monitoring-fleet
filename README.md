@@ -4,10 +4,10 @@ This is a playground that creates a monitoring environment by using gitOps princ
 
 We gonna create two repositories:
 
-  * fluxcd-monitoring-lab
+  - *fluxcd-monitoring-lab*
     this repository has all fluxcd system resources
 
-  * monitoring-fleet
+  - *monitoring-fleet*
     this repository has all infrastructure & monitoring resources (nginx ingress, prometheus, alert-manager, grafana)
 
 ## Features
@@ -58,13 +58,11 @@ flux bootstrap github --owner=$GITHUB_USER \
 Requirements:
 
 - 1. clone the fluxcd-monitoring-lab repository
-- 2. jump into the fluxcd-monitoring-lab repository folder
-- 3. fork the repository: https://github.com/eduardolmedeiros/monitoring-fleet
-- 4. clone the monitoring-fleet (fork repository)
-- 5. jump into the monitoring-fleet repository folder and deploy monitoring resources:
+- 2. fork the repository: https://github.com/eduardolmedeiros/monitoring-fleet
+- 3. jump into the fluxcd-monitoring-lab repository folder
 
 flux create source git monitoring-fleet \
-  --url=https://github.com/<user>/monitoring-fleet \
+  --url=https://github.com/$GITHUB_USER/monitoring-fleet \
   --branch=main \
   --interval=1m \
   --export > ./clusters/dev/monitoring-fleet-repo.yaml
@@ -115,11 +113,20 @@ http://alert-manager.k8s.local
 ## fluxcd useful commands
 
 ```
-flux get all # get all resources and statuses
-flux reconcile kustomization infrastructure # force sync for infrastructure resources
-flux reconcile kustomization monitoring # force sync for monitoring resources
-flux get helmreleases --all-namespaces # get all helm releases status in all namespaces
-flux get helmreleases -n monitoring # get helm release in monitoring namespace
+# get all resources and statuses
+flux get all 
+
+# force sync for infrastructure resources
+flux reconcile kustomization infrastructure
+
+# force sync for monitoring resources
+flux reconcile kustomization monitoring
+
+# get all helm releases status in all namespaces
+flux get helmreleases --all-namespaces
+
+# get helm release in monitoring namespace
+flux get helmreleases -n monitoring 
 ```
 
 ## How to update/manage the monitoring resources?
