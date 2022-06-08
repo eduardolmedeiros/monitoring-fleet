@@ -2,6 +2,14 @@
 
 This is a playground that creates a monitoring environment by using gitOps principles.
 
+We gonna create two repositories:
+
+  * fluxcd-monitoring-lab
+    this repository has all fluxcd system resources
+
+  * monitoring-fleet
+    this repository has all infrastructure monitoring resources (nginx ingress, prometheus, alert-manager, grafana)
+
 ## Features
 
   * k8s cluster running on docker via kind
@@ -50,10 +58,11 @@ flux bootstrap github --owner=$GITHUB_USER \
 
 #### Requirements:
 
-- 1. fork this repository: https://github.com/eduardolmedeiros/monitoring-fleet
-- 2. clone the repository
-- 3. jump into the repository folder
-- 4. create monitoring resources
+- 1. clone the fluxcd-monitoring-lab repository
+- 2. jump into the fluxcd-monitoring-lab repository folder
+- 3. fork the repository: https://github.com/eduardolmedeiros/monitoring-fleet
+- 4. clone the monitoring-fleet (fork repository)
+- 5. deploy monitoring resources
 
 flux create source git monitoring-fleet \
   --url=https://github.com/<user>/monitoring-fleet \
@@ -86,7 +95,7 @@ flux create kustomization monitoring \
   --interval=1m \
   --export > ./clusters/dev/monitoring.yaml
 
-- 5. add & push all files
+- 5. add & commit & push all files
 ```
 
 ### 6. update /etc/hosts file (required to access all ingress hosts)
@@ -116,7 +125,7 @@ flux get helmreleases -n monitoring # get helm release in monitoring namespace
 
 ## How to update/manage the monitoring resources?
 
-Just update the yaml files from the forked repository (monitoring-fleet)
+Just update the yaml files from the monitoring-fleet (fork repository)
 
 ## How to uninstall?
 
