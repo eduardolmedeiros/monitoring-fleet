@@ -55,8 +55,7 @@ flux bootstrap github --owner=$GITHUB_USER \
 ### 5. Deploy monitoring stack
 
 ```
-
-#### Requirements:
+Requirements:
 
 - 1. clone the fluxcd-monitoring-lab repository
 - 2. jump into the fluxcd-monitoring-lab repository folder
