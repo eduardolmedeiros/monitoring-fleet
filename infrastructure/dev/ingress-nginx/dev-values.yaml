@@ -1,0 +1,7 @@
+# Default values
+# https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
+controller:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 2

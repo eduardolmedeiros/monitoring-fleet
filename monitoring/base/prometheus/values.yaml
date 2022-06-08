@@ -1,0 +1,17 @@
+# Default values
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+## Disabling scraping of Master Nodes Components
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeProxy:
+  enabled: false
+## Prometheus
+prometheus:
+  prometheusSpec:
+    replicas: 2
+    retention: 15d
