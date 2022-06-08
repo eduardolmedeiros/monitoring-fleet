@@ -57,9 +57,10 @@ flux bootstrap github --owner=$GITHUB_USER \
 ```
 Requirements:
 
-- 1. clone the fluxcd-monitoring-lab repository
+- 1. clone the fluxcd-monitoring-lab repository (previously created by the bootstrap command)
 - 2. fork the repository: https://github.com/eduardolmedeiros/monitoring-fleet
 - 3. jump into the fluxcd-monitoring-lab repository folder
+- 4. create all infrastructure & monitoring resources
 
 flux create source git monitoring-fleet \
   --url=https://github.com/$GITHUB_USER/monitoring-fleet \
