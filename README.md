@@ -61,7 +61,7 @@ Requirements:
 - 2. jump into the fluxcd-monitoring-lab repository folder
 - 3. fork the repository: https://github.com/eduardolmedeiros/monitoring-fleet
 - 4. clone the monitoring-fleet (fork repository)
-- 5. deploy monitoring resources
+- 5. jump into the monitoring-fleet repository folder and deploy monitoring resources:
 
 flux create source git monitoring-fleet \
   --url=https://github.com/<user>/monitoring-fleet \
@@ -97,7 +97,7 @@ flux create kustomization monitoring \
 - 5. add & commit & push all files
 ```
 
-### 6. update /etc/hosts file (required to access all ingress hosts)
+### 6. Update /etc/hosts file (required to access all ingress hosts)
 
 ```
 # monitoring lab
