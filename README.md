@@ -8,7 +8,7 @@ We gonna create two repositories:
     this repository has all fluxcd system resources
 
   * monitoring-fleet
-    this repository has all infrastructure monitoring resources (nginx ingress, prometheus, alert-manager, grafana)
+    this repository has all infrastructure & monitoring resources (nginx ingress, prometheus, alert-manager, grafana)
 
 ## Features
 
