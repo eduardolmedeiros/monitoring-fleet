@@ -4,10 +4,10 @@ This is a playground that creates a monitoring environment by using gitOps princ
 
 We gonna create two repositories:
 
-  - *fluxcd-monitoring-lab*
+  - **fluxcd-monitoring-lab**
     this repository has all fluxcd system resources
 
-  - *monitoring-fleet*
+  - **monitoring-fleet**
     this repository has all infrastructure & monitoring resources (nginx ingress, prometheus, alert-manager, grafana)
 
 ## Features
