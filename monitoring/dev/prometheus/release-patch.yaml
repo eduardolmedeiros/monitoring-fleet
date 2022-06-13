@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 35.5.1
+      version: 36.0.1
   valuesFrom:
     - kind: ConfigMap
       name: kube-prometheus-values
