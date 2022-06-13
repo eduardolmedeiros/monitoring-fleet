@@ -2,14 +2,6 @@
 
 This is a playground that creates a monitoring environment by using gitOps principles.
 
-We gonna create two repositories:
-
-  - **fluxcd-monitoring-lab**
-    this repository has all fluxcd system resources
-
-  - **monitoring-fleet**
-    this repository has all infrastructure & monitoring resources (nginx ingress, prometheus, alert-manager, grafana)
-
 ## Features
 
   * k8s cluster running on docker via kind
@@ -20,6 +12,14 @@ We gonna create two repositories:
   * grafana dashboard as a code (fluxcd and ingress controller)
 
 ## Installation
+
+For this playground, we gonna create two repositories:
+
+| Name                       | Description                                                                                        |
+| -------------------------- | -------------------------------------------------------------------------------------------------- |
+| **fluxcd-monitoring-lab**  | host fluxcd system resources                                                                       |
+| **monitoring-fleet**       | host all infrastructure & monitoring resources (nginx ingress, prometheus, alert-manager, grafana) |
+    
 
 ### 1. Install requirements
 
@@ -54,13 +54,25 @@ flux bootstrap github --owner=$GITHUB_USER \
 
 ### 5. Deploy monitoring stack
 
-```
-Requirements:
+#### Deployment
 
-- 1. clone the fluxcd-monitoring-lab repository (previously created by the bootstrap command)
-- 2. fork the repository: https://github.com/eduardolmedeiros/monitoring-fleet
-- 3. jump into the fluxcd-monitoring-lab repository folder
-- 4. create all infrastructure & monitoring resources
+5.1 fork the repository [monitoring-fleet](https://github.com/eduardolmedeiros/monitoring-fleet)
+
+```
+gh repo fork --remote https://github.com/eduardolmedeiros/monitoring-fleet
+```
+
+5.2 Clone the fluxcd-monitoring-lab repository (previously created by the bootstrap command)
+
+```
+git clone https://github.com/$GITHUB_USER/fluxcd-monitoring-lab
+```
+
+
+5.4 Create all infrastructure & monitoring resources
+
+```
+cd fluxcd-monitoring-lab
 
 flux create source git monitoring-fleet \
   --url=https://github.com/$GITHUB_USER/monitoring-fleet \
@@ -92,15 +104,23 @@ flux create kustomization monitoring \
   --prune=true \
   --interval=1m \
   --export > ./clusters/dev/monitoring.yaml
+```
 
-- 5. add & commit & push all files
+### 5 Add & commit & push all files
+
+```
+cd fluxcd-monitoring-lab
+git add .
+git commit -m "setup monitoring environment" -a
+git pull
+git push
 ```
 
 ### 6. Update /etc/hosts file (required to access all ingress hosts)
 
 ```
-# monitoring lab
-127.0.0.1 grafana.k8s.local alert-manager.k8s.local prometheus.k8s.local
+echo "# monitoring lab
+127.0.0.1 grafana.k8s.local alert-manager.k8s.local prometheus.k8s.local" >> /etc/hosts
 ```
 
 ### 7. Access monitoring resources
