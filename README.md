@@ -15,10 +15,10 @@ This is a playground that creates a monitoring environment by using gitOps princ
 
 For this playground, we gonna create two repositories:
 
-| Name                       | Description                                                                                        |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| **fluxcd-monitoring-lab**  | host fluxcd system resources                                                                       |
-| **monitoring-fleet**       | host all infrastructure & monitoring resources (nginx ingress, prometheus, alert-manager, grafana) |
+| Name                       | Description                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **fluxcd-monitoring-lab**  | contains fluxcd system manifests files                                                                        |
+| **monitoring-fleet**       | contains all infrastructure & monitoring (nginx ingress, prometheus, alert-manager, grafana) manifests files  |
     
 
 ### 1. Install requirements
@@ -56,20 +56,20 @@ flux bootstrap github --owner=$GITHUB_USER \
 
 #### Deployment
 
-5.1 fork the repository [monitoring-fleet](https://github.com/eduardolmedeiros/monitoring-fleet)
+Fork the repository [monitoring-fleet](https://github.com/eduardolmedeiros/monitoring-fleet)
 
 ```
 gh repo fork --remote https://github.com/eduardolmedeiros/monitoring-fleet
 ```
 
-5.2 Clone the fluxcd-monitoring-lab repository (previously created by the bootstrap command)
+Clone the fluxcd-monitoring-lab repository (previously created by the bootstrap command)
 
 ```
 git clone https://github.com/$GITHUB_USER/fluxcd-monitoring-lab
 ```
 
 
-5.4 Create all infrastructure & monitoring resources
+Create all infrastructure & monitoring resources
 
 ```
 cd fluxcd-monitoring-lab
@@ -153,6 +153,18 @@ flux get helmreleases -n monitoring
 ## How to update/manage the monitoring resources?
 
 Just update the yaml files from the monitoring-fleet (fork repository)
+
+Example:
+
+Update the kube-prometheus chart version to the [latest version](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack).
+file: `monitoring/dev/prometheus/release-patch.yaml`
+
+Push the changes and check the fluxcd.
+
+```
+flux logs
+flux get helmreleases -n monitoring 
+```
 
 ## How to uninstall?
 
