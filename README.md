@@ -157,7 +157,14 @@ Just update the yaml files from the monitoring-fleet (fork repository)
 Example:
 
 Update the kube-prometheus chart version to the [latest version](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack).
-file: `monitoring/dev/prometheus/release-patch.yaml`
+
+
+```
+cd monitoring-fleet
+vim monitoring/dev/prometheus/release-patch.yaml
+git commit -m "update kube-prometheus chart version" -a
+git pull ; git push
+```
 
 Push the changes and check the fluxcd.
 
