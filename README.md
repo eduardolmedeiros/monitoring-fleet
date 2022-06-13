@@ -32,7 +32,8 @@ For this playground, we gonna create two repositories:
 ### 2. Install k8s playground
 
 ```
-kind create cluster --name monitoring  --config kind.yaml
+curl -o kind.yaml https://raw.githubusercontent.com/eduardolmedeiros/monitoring-fleet/main/kind.yaml
+kind create cluster --name monitoring --config kind.yaml
 kubectl config set-context kind-monitoring
 ```
 
