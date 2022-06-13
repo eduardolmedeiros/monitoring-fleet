@@ -82,7 +82,6 @@ flux create source git monitoring-fleet \
   --export > ./clusters/dev/monitoring-fleet-repo.yaml
 
 flux create kustomization sources \
-  --target-namespace=flux-system \
   --source=monitoring-fleet \
   --path="./sources" \
   --prune=true \
@@ -90,7 +89,6 @@ flux create kustomization sources \
   --export > ./clusters/dev/sources.yaml
 
 flux create kustomization infrastructure \
-  --target-namespace=flux-system \
   --source=monitoring-fleet \
   --path="./infrastructure/dev" \
   --prune=true \
@@ -98,7 +96,6 @@ flux create kustomization infrastructure \
   --export > ./clusters/dev/infrastructure.yaml
 
 flux create kustomization monitoring \
-  --target-namespace=flux-system \
   --source=monitoring-fleet \
   --path="./monitoring/dev" \
   --depends-on=infrastructure \
